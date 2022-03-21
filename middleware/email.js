@@ -6,7 +6,7 @@ let transporter = nodemailer.createTransport({
 	secure: true, // true for 465, false for other ports
 	auth: {
 		user: '1332726596@qq.com', // 发送方的邮箱
-		pass: 'rjtegvjdozzvjeac' // smtp 的授权码
+		pass: 'rjtexxxxxxxx' // smtp 的授权码
 	}
 });
 
