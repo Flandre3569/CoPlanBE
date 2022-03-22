@@ -19,6 +19,14 @@ const errorHandler = (err, ctx) => {
       status = 401;
       message = 'token未授权';
       break;
+    case errors.PARAMETER_ERROR:
+      status = 400;
+      message = '参数错误，请核实您的邮箱';
+      break;
+    case errors.FALIURE_SEND_EMAIL:
+      status = 421;
+      message = '订阅失败';
+      break;
     default:
       status = 404;
       message = 'NOT FOUND';
