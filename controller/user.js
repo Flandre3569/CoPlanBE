@@ -31,6 +31,12 @@ class UserController {
     }
   };
 
+  async setProfile(ctx, next) {
+    const profile = ctx.request.body;
+    const result = await service.InitUserInfo(profile);
+    ctx.response.body = result;
+  }
+
   // 测试token验证的方法
   success(ctx, next) {
     ctx.response.body = '验证成功';

@@ -14,6 +14,13 @@ class UserService {
     const result = await conn.execute(sql, [username])
     return result[0];
   }
+
+  async InitUserInfo(payload) {
+    const { user_id, name, avatar, email } = payload;
+    const sql = 'INSERT INTO `user_info`(`user_id`, `name`, `avatar`, `email`) VALUES (?, ?, ?, ?);';
+    const result = await conn.execute(sql, [user_id, name, avatar, email]);
+    return result;
+  }
 }
 
 module.exports = new UserService();
