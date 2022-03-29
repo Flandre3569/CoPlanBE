@@ -22,6 +22,7 @@ const userVerify = async (ctx, next) => {
 
 const authVerify = async (ctx, next) => {
   const authorization = ctx.request.headers.authorization;
+  console.log(authorization);
   const token = authorization.split(" ")[1];
   
   try {

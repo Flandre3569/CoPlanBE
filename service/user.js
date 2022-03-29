@@ -21,6 +21,12 @@ class UserService {
     const result = await conn.execute(sql, [user_id, name, avatar, email]);
     return result;
   }
+
+  async queryProfileByUserId(id) {
+    const sql = 'SELECT * FROM user_info WHERE user_id = ?;';
+    const result = await conn.execute(sql, [id]);
+    return result[0];
+  }
 }
 
 module.exports = new UserService();

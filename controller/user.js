@@ -37,6 +37,12 @@ class UserController {
     ctx.response.body = result;
   }
 
+  async queryProfile(ctx, next) {
+    const profile = ctx.request.body;
+    const result = await service.queryProfileByUserId(profile.id);
+    ctx.response.body = result;
+  }
+
   // 测试token验证的方法
   success(ctx, next) {
     ctx.response.body = '验证成功';
