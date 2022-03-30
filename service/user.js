@@ -23,7 +23,7 @@ class UserService {
   }
 
   async queryProfileByUserId(id) {
-    const sql = 'SELECT * FROM user_info WHERE user_id = ?;';
+    const sql = 'SELECT * FROM `user_info` WHERE `user_id` = ?;';
     const result = await conn.execute(sql, [id]);
     return result[0];
   }

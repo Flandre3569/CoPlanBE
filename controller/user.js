@@ -38,8 +38,8 @@ class UserController {
   }
 
   async queryProfile(ctx, next) {
-    const profile = ctx.request.body;
-    const result = await service.queryProfileByUserId(profile.id);
+    const { id } = ctx.request.body;
+    const result = await service.queryProfileByUserId(id);
     ctx.response.body = result;
   }
 
