@@ -16,9 +16,9 @@ class UserService {
   }
 
   async InitUserInfo(payload) {
-    const { user_id, name, avatar, email } = payload;
-    const sql = 'INSERT INTO `user_info`(`user_id`, `name`, `avatar`, `email`) VALUES (?, ?, ?, ?);';
-    const result = await conn.execute(sql, [user_id, name, avatar, email]);
+    const { user_id, name, university, address, avatar, email } = payload;
+    const sql = 'INSERT INTO `user_info`(`user_id`, `name`, `university`, `address`, `avatar`, `email`) VALUES (?, ?, ?, ?);';
+    const result = await conn.execute(sql, [user_id, name, university, address, avatar, email]);
     return result;
   }
 
