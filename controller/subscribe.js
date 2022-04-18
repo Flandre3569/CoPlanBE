@@ -1,6 +1,7 @@
 const errorTypes = require('../errors/error-types');
 const check = {} //声明一个对象缓存邮箱和验证码，留着
 const email = require('../middleware/email'); //引入封装好的函数
+const service = require('../service/subscribe'); // 将订阅的邮箱进行存储
 
 class Subscribe {
   async subscribe(ctx, next) {
@@ -18,7 +19,10 @@ class Subscribe {
         })
       })
     }
-    
+
+    // 将邮箱存储到数据库中
+    service.subscribe(mail);
+
     await timeout().then(state => {
       if (state) {
         return ctx.body = "success";
