@@ -7,7 +7,7 @@ class UserService {
     const result = await conn.execute(sql, [username, password]);
     return result;
   }
-  
+
   async queryByName(user) {
     const { username, password } = user;
     const sql = 'SELECT * FROM users WHERE `name` = ?;';
