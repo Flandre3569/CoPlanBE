@@ -16,7 +16,11 @@ const {
   MYSQL_USER,
   MYSQL_PASSWORD,
   MYSQL_DATABASE,
-  EMAIL_STMP
+  EMAIL_STMP,
+  REGION,
+  ACCESSKEY_ID,
+  ACCESSKEY_SECRET,
+  BUCKET
 } = process.env
 
 module.exports = {
@@ -28,5 +32,9 @@ module.exports = {
   MYSQL_DATABASE,
   PRIVATE_KEY,
   PUBLIC_KEY,
-  EMAIL_STMP
+  EMAIL_STMP,
+  REGION,
+  ACCESSKEY_ID,
+  ACCESSKEY_SECRET,
+  BUCKET
 };
