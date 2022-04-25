@@ -15,7 +15,6 @@ const rules = [{
   allowedMethod: 'GET',
   // 指定允许跨域请求的响应头。建议无特殊情况下将此项设置为通配符星号（*）。
   allowedHeader: '*',
-  // 指定允许用户从应用程序中访问的响应头，例如一个JavaScript的XMLHttpRequest对象。不允许使用通配符星号（*）。
 }];
 // 最多允许设置10条跨域资源共享规则。如果配置了相同的规则，则已存在的规则将被覆盖。
 const putResult = await client.putBucketCORS(config.BUCKET, rules);
