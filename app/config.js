@@ -20,7 +20,8 @@ const {
   REGION,
   ACCESSKEY_ID,
   ACCESSKEY_SECRET,
-  BUCKET
+  BUCKET,
+  END_POINT
 } = process.env
 
 module.exports = {
@@ -36,5 +37,6 @@ module.exports = {
   REGION,
   ACCESSKEY_ID,
   ACCESSKEY_SECRET,
-  BUCKET
+  BUCKET,
+  END_POINT
 };
