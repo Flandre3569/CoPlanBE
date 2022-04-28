@@ -29,7 +29,6 @@ const bucket = BUCKET;
 
 const uploadAvatar = async (ctx, next) => {
   // 文件路径
-  // console.log(ctx.request.file);
   let filePath = path.resolve('./' + ctx.request.file.path);
   // 文件类型
   let temp = ctx.request.file.originalname.split('.');
@@ -39,7 +38,6 @@ const uploadAvatar = async (ctx, next) => {
   let fileName = Date.now() + lastName;
   // 图片重命名
   let key = fileName;
-  console.log(key);
   // 阿里云 上传文件 
   co(async function () {
     client.useBucket(bucket);
@@ -49,7 +47,7 @@ const uploadAvatar = async (ctx, next) => {
     // 上传之后删除本地文件
     fs.unlinkSync(filePath);
     ctx.response.body = {
-      status: "200",
+      code: 200,
       message: "OK",
       path: imageSrc
     }
@@ -57,7 +55,7 @@ const uploadAvatar = async (ctx, next) => {
     // 上传之后删除本地文件
     // 如果你发现上传失败了，多检查一下配置参数是否有问题，参数出问题的可能性比较大
     fs.unlinkSync(filePath);
-    ctx.response.body = { code: 0, msg: '500', error: "上传失败" };
+    ctx.response.body = { code: 500, message: '上传失败' };
   });
 }
 
