@@ -38,13 +38,13 @@ const uploadAvatar = async (ctx, next) => {
   let fileName = Date.now() + lastName;
   // 图片重命名
   let key = fileName;
-  // 阿里云 上传文件 
+  // 上传文件 
   co(async function () {
     client.useBucket(bucket);
     let result = await client.put('/image/coplan' + key, filePath); // 这是上传的代码
     let imageSrc = `http://${endPoint}/` + result.name;
     console.log(imageSrc);
-    // 上传之后删除本地文件
+    // 删除本地文件
     fs.unlinkSync(filePath);
     ctx.response.body = {
       code: 200,
@@ -52,10 +52,9 @@ const uploadAvatar = async (ctx, next) => {
       path: imageSrc
     }
   }).catch(function (err) {
-    // 上传之后删除本地文件
-    // 如果你发现上传失败了，多检查一下配置参数是否有问题，参数出问题的可能性比较大
+    // 删除本地文件
     fs.unlinkSync(filePath);
-    ctx.response.body = { code: 500, message: '上传失败' };
+    ctx.response.body = { code: 500, message: 'upload error' };
   });
 }
 
