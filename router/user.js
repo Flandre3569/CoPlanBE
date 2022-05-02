@@ -31,7 +31,7 @@ userRouter.post('/register', userVerify, md5Crypto, register); // 注册
 userRouter.post('/login', login, authSign); // 登录，颁布令牌
 userRouter.post('/profile', authVerify, setProfile); // 初始化个人信息
 userRouter.post('/queryProfile', authVerify, queryProfile); // 查询个人信息
-userRouter.post('/avatarUpload', upload.single('file'), uploadAvatar); // 上传头像到oss
+userRouter.post('/avatarUpload', authVerify, upload.single('file'), uploadAvatar); // 上传头像到oss
 
 
 userRouter.get('/test', authVerify, success); // 测试用例

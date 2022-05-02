@@ -28,6 +28,7 @@ const bucket = BUCKET;
 // const putResult = await client.putBucketCORS(config.BUCKET, rules);
 
 const uploadAvatar = async (ctx, next) => {
+  console.log("到了这里了");
   // 文件路径
   let filePath = path.resolve('./' + ctx.request.file.path);
   // 文件类型
