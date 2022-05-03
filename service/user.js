@@ -27,6 +27,13 @@ class UserService {
     const result = await conn.execute(sql, [id]);
     return result[0];
   }
+
+  async changeUserAvatar(payload) {
+    const { id, path } = payload;
+    const sql = 'UPDATE `user_info` SET `avatar` = ? WHERE `user_id` = ?;';
+    const result = await conn.execute(sql, [path, id]);
+    return result[0];
+  }
 }
 
 module.exports = new UserService();

@@ -11,24 +11,24 @@ const userVerify = async (ctx, next) => {
     return ctx.app.emit('error', error, ctx)
   }
 
-  const result = await service.queryByName({ username,password });
+  const result = await service.queryByName({ username, password });
   if (result.length) {
     const error = new Error(errorTypes.ALREADY_HAVE_USER);
     return ctx.app.emit('error', error, ctx);
   }
-  
+
   await next();
 }
 
 const authVerify = async (ctx, next) => {
   const authorization = ctx.request.headers.authorization;
   const token = authorization.split(" ")[1];
-  
   try {
     const result = jwt.verify(token, PUBLIC_KEY, {
       algorithms: ["RS256"]
     })
     console.log(result);
+    ctx.user_id = result.id;
     await next();
   } catch (err) {
     const error = new Error(errorTypes.NO_AUTHORIZATION);

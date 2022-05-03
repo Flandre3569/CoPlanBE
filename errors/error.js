@@ -27,6 +27,10 @@ const errorHandler = (err, ctx) => {
       status = 421;
       message = '订阅失败';
       break;
+    case errors.UPLOAD_FLAIURE:
+      status = 400;
+      message = "图片上传失败";
+      break;
     default:
       status = 404;
       message = 'NOT FOUND';

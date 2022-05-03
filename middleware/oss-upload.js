@@ -4,6 +4,9 @@ const OSS = require('ali-oss');
 const co = require('co');
 const fs = require('fs');
 
+// 错误处理
+const errorTypes = require('../errors/error-types');
+
 const { REGION, ACCESSKEY_ID, ACCESSKEY_SECRET, BUCKET, END_POINT } = require('../app/config');
 
 const client = new OSS({ // 连接OSS实例
@@ -28,7 +31,6 @@ const bucket = BUCKET;
 // const putResult = await client.putBucketCORS(config.BUCKET, rules);
 
 const uploadAvatar = async (ctx, next) => {
-  console.log("到了这里了");
   // 文件路径
   let filePath = path.resolve('./' + ctx.request.file.path);
   // 文件类型
@@ -39,24 +41,28 @@ const uploadAvatar = async (ctx, next) => {
   let fileName = Date.now() + lastName;
   // 图片重命名
   let key = fileName;
-  // 上传文件 
-  co(async function () {
-    client.useBucket(bucket);
-    let result = await client.put('/image/coplan' + key, filePath); // 这是上传的代码
-    let imageSrc = `http://${endPoint}/` + result.name;
-    console.log(imageSrc);
-    // 删除本地文件
-    fs.unlinkSync(filePath);
-    ctx.response.body = {
-      code: 200,
-      message: "OK",
-      path: imageSrc
-    }
-  }).catch(function (err) {
-    // 删除本地文件
-    fs.unlinkSync(filePath);
-    ctx.response.body = { code: 500, message: 'upload error' };
-  });
+
+  // 上传文件
+  function handleUpload() {
+    return new Promise(async (resolve, reject) => {
+      client.useBucket(bucket);
+      let result = await client.put('/image/coplan/' + key, filePath); // 上传
+      let imageSrc = `http://${endPoint}/` + result.name;
+      // 删除本地文件
+      fs.unlinkSync(filePath);
+      // 返回图片地址
+      resolve(imageSrc)
+    }).catch(err => {
+      // 删除本地文件
+      fs.unlinkSync(filePath);
+      // 上传失败
+      const error = new Error(errorTypes.UPLOAD_FLAIURE);
+      return ctx.app.emit('error', error, ctx);
+    })
+  }
+
+  const result = await co(handleUpload);
+  return result;
 }
 
 module.exports = {

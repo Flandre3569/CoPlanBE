@@ -4,6 +4,7 @@ const USERNAME_OR_PASSWORD_ERROR = "username or password error"
 const NO_AUTHORIZATION = "no authorization"
 const PARAMETER_ERROR = 'parameter error'
 const FALIURE_SEND_EMAIL = 'email send unsuccessfully'
+const UPLOAD_FLAIURE = 'uploading picture failed'
 
 module.exports = {
   NO_USER_OR_PASSWORD,
@@ -11,5 +12,6 @@ module.exports = {
   USERNAME_OR_PASSWORD_ERROR,
   NO_AUTHORIZATION,
   PARAMETER_ERROR,
-  FALIURE_SEND_EMAIL
+  FALIURE_SEND_EMAIL,
+  UPLOAD_FLAIURE
 }
