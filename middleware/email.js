@@ -1,12 +1,12 @@
 const config = require('../app/config')
 const nodemailer = require('nodemailer'); //引入模块
 let transporter = nodemailer.createTransport({
-    //node_modules/nodemailer/lib/well-known/services.json  查看相关的配置，如果使用qq邮箱，就查看qq邮箱的相关配置
+	//node_modules/nodemailer/lib/well-known/services.json  查看相关的配置，如果使用qq邮箱，就查看qq邮箱的相关配置
 	service: 'qq', //类型qq邮箱
 	port: 465,
 	secure: true, // true for 465, false for other ports
 	auth: {
-		user: '1332726596@qq.com', // 发送方的邮箱
+		user: config.EMAIL, // 发送方的邮箱
 		pass: config.EMAIL_STMP // smtp 的授权码
 	}
 });
